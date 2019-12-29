@@ -5,13 +5,14 @@
   <div class="card" *ngFor="let contact of contacts">
     <h4 *ngIf="contact.avatar"><a routerLink="/details/{{contact.id}}">{{contact.first_name}}</a></h4>
     <h4 *ngIf="!contact.avatar">{{contact.first_name}}</h4>
-    <br><img src="{{contact.avatar}}"><br>
+    <br><a routerLink="/details/{{contact.id}}"><img src="{{contact.avatar}}"></a><br>
     <div *ngIf="contact.avatar">
       <button class="options btn btn-info btn-sm" (click)="edit(contact.id)" data-toggle="modal"
         data-target="#editModal">
         <mat-icon>edit</mat-icon>
       </button>&nbsp;
-      <button class="options btn btn-danger btn-sm" (click)="delete(contact.id)">
+      <button class="options btn btn-danger btn-sm" (click)="selectContact(contact.id)" data-toggle="modal"
+        data-target="#deleteModal">
         <mat-icon>remove</mat-icon>
       </button>
     </div>
@@ -24,8 +25,7 @@
 
 <!-- MODAL TO EDIT A CONTACT-->
 
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
-  aria-hidden="true">
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -52,7 +52,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button (click)="save(contact.id)" type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+        <button (click)="save(contact.id)" type="button" class="btn btn-primary" data-dismiss="modal"
+          data-toggle="modal" data-target="#responseModal">Save
+        </button>
       </div>
     </div>
   </div>
@@ -60,8 +62,7 @@
 
 <!-- MODAL TO ADD A CONTACT-->
 
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel"
-  aria-hidden="true">
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -88,7 +89,54 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button (click)="add()" type="button" class="btn btn-success" data-dismiss="modal">Accept</button>
+        <button (click)="add()" type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal"
+          data-target="#responseModal">Accept
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL TO DELETE A CONTACT-->
+
+<div id="deleteModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Deleting {{fullName}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete this contact?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="delete(contact.id)" data-dismiss="modal"
+          data-toggle="modal" data-target="#responseModal">Yes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL WITH THE RESPONSE -->
+
+<div id="responseModal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Response</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{response}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
       </div>
     </div>
   </div>

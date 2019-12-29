@@ -8,9 +8,9 @@ Run `npm install` before to start.
 
 ## Explanation of the project
 
-Reqres doesn't store any of the data at all. Once you send data, Reqres just send it straight back...and then it's gone!
+Reqres does not store any of the data at all. Once you send data, Reqres just send it straight back...and then it is gone!
 
-Because of that, I put the responses of the requests in the logs (console). You can't see new or deleted users in the UI. You only can see the existing data (list of contacts and details of each one).
+Because of that, I put the responses of the API's requests in modals. You cannot see new or deleted users in the UI. You only can see the existing data (list of contacts and details of each one) in Reqres (REST API mockup).
 
 ## Development server
 
